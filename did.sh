@@ -52,6 +52,20 @@ function addLine(){
 
 }
 
+# Check if dependencies are installed
+
+for depName in pcregrep sed $EDITOR
+do
+    if [ "$(which $depName 2>/dev/null)" = "" ]; then
+        echo "$depName needs to be installed."
+        deps="1"
+    fi
+done
+
+if [ "$deps" = "1" ]; then
+    exit 1
+fi
+
 
 if [ "$#" -eq 0 ] ; then
     # show the journal in the editor
