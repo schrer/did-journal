@@ -28,27 +28,27 @@ input=$1
 function addLine(){
 
     # sed seems to have problems adding a line to the bottom of a file so i add one line at the bottom of a new file so sed never has to insert at the last line of the did.txt
-    if ! [ -e $didPath ]; then
-        echo "# You have reached the bottom of your Journal">$didPath
+    if ! [ -e "$didPath" ]; then
+        echo "# You have reached the bottom of your Journal">"$didPath"
     fi
 
-    fileCont=$(cat $didPath)
+    fileCont=$(cat "$didPath")
     timeLine=$(date +"%T")
 
     # insert new dateline if top line does not contain current date
     if [[ $fileCont != $dateLine* ]]; then
-        sed -i "1s/^/$dateLine\n/" $didPath
+        sed -i "1s/^/$dateLine\n/" "$didPath"
     fi
 
     # get number of lines and add 1 to get position for insert
     grepRegex="^#\s$currentDate[^#]*"
-    numLines=$(pcregrep -M $grepRegex $didPath | wc -l)
+    numLines=$(pcregrep -M $grepRegex "$didPath" | wc -l)
     numLines=$(($numLines + 1))
 
     # insert new line
     newLine="[$timeLine] $input"
     sedCommand=$numLines"i$newLine"
-    sed -i "$sedCommand" $didPath
+    sed -i "$sedCommand" "$didPath"
 
 }
 
@@ -69,12 +69,11 @@ fi
 
 if [ "$#" -eq 0 ] ; then
     # show the journal in the editor
-    $EDITOR $didPath
+    $EDITOR "$didPath"
 
 elif [ "$1" = "-e" ]; then
     # open script for editing
     $EDITOR $0
-
 
 elif [ "$#" -ge 2 ]; then
     echo "USAGE: did INPUT or did [OPTION]"
