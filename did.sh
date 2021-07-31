@@ -25,8 +25,8 @@ didPath=~/did.txt
 currentDate=$(date +"%d.%m.%Y")
 dateLine="# $currentDate"
 
-
-input=$1
+# Join all arguments into one, so inputs don't need to be in quotes if they contain spaces
+input="$*"
 
 
 function addLine(){
@@ -75,15 +75,18 @@ if [ "$#" -eq 0 ] ; then
     # show the journal in the editor
     $EDITOR "$didPath"
 
-elif [ "$1" = "-e" ]; then
+elif [ "$input" = "-e" ]; then
     # open script for editing
     $EDITOR $0
 
-elif [ "$#" -ge 2 ]; then
-    echo "USAGE: did INPUT or did [OPTION]"
-    echo "    Options: -e ... open script itself in editor"
-    echo "    Giving no option or input will open the journal in the editor"
-    echo "    INPUT needs to be one argument, meaning enclosed in hyphens if it contains spaces"
+elif [ "$input" = "-h" ]; then
+    echo "Usage: did [INPUT|OPTION]"
+    echo "Options:"
+    echo "  -e ... open did-script itself in editor"
+    echo "  -h ... show this help message"
+    echo ""
+    echo "Giving no option or input will open the journal in the editor"
+    echo "Options and input cannot be given at the same time, it will be interpreted as input"
 
 else
     # add a new entry to the journal
