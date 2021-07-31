@@ -10,14 +10,14 @@
 # * some CLI text editor
 
 
+# Where you want to store the journal
+didPath=~/did.md
+
+
 # Setting default nano if EDITOR is not set
 if [ -z ${EDITOR:+x} ]; then
     EDITOR=nano
 fi
-
-# Where you want to store the journal
-didPath=~/did.txt
-
 
 # You can change what the dateline that gets created for every new day looks like with these two lines
 # But keep in mind that for any change in dateline you need to change the regular expression stored in $grepRegex to match your new "design"
