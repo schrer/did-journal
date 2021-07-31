@@ -39,8 +39,8 @@ did [OPTION|ENTRY]
   Giving some string will insert the string into the journal as a new entry.
 
 Options:
-	-e	open the script itself in an editor to edit it
-	-h  show the help message
+	-e    open the script itself in an editor to edit it
+	-h    show the help message
 ```
 
 Example:
