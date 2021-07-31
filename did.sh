@@ -1,15 +1,19 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Usable with any command line editor, standard is nano but just edit the EDITOR variable to point to any editor you like.
+# Usable with any command line editor, standard is nano but just edit the EDITOR variable to point to any editor you prefer.
 # EDITOR will be used to show the journal and edit the script itself
 # Also configure $didPath (where to store the journal) before using the script
 #
 # Dependencies:
 # * pcregrep
 # * sed
+# * some CLI text editor
 
-# Your preferred (command line) editor
-EDITOR=nano
+
+# Setting default nano if EDITOR is not set
+if [ -z ${EDITOR:+x} ]; then
+    EDITOR=nano
+fi
 
 # Where you want to store the journal
 didPath=~/did.txt
